@@ -36,6 +36,16 @@ class Dict
         void setObjectif(vector<Fraction> const & vect);
 
         void petitPivot(int basi, int nonBasi); //echange dans ligne du pivot la variable basic et la non basic
+        void remplaceVar(int var1, int var2); //remplace var2 par son expression dans l'expression de var1
+        void remplaceVarObj(int var2);
+
+        void grosPivot(int varSortante, int varEntrante);
+
+        int choixEntranteBland(); //renvoie -1 si pas de variables entrante possible
+        int choixSortanteBland(int entrante); //-1 si pas de variables sortantes
+        int choixEntranteMax();
+
+        void simplexUnePhase();
 
         void printDict();
 

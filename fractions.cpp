@@ -89,7 +89,7 @@ void Fraction::soustraction(Fraction f)
 void Fraction::printFraction()
 {
     if (denom == 1)
-        cout << " " << num << " ";
+        cout << " " << num;
     else
-        cout << " "<< num << "/" << denom << " ";
+        cout << " " << num << "/" << denom ;
 }

@@ -33,6 +33,9 @@ class Fraction
         void setDenom(int b) {denom = b;} ;
         void setZero() {num = 0; denom = 1;};
         bool nonZero() {return num != 0;};
+        bool estPositif() {return (num > 0 && denom > 0) || (num < 0 && denom < 0);};
+        bool estNegatif() {return (num < 0 && denom > 0) || (num > 0 && denom < 0);};
+        bool strictInf(Fraction f) {Fraction g = this->clone(); g.soustraction(f); return g.estNegatif();};
 
         Fraction clone() {Fraction f(num, denom); return f;};
         void copie(Fraction f) {num = f.getNum(); denom = f.getDenom();};
