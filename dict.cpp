@@ -3,6 +3,8 @@
 
 void Dict::setBasicVar(int i, vector<Fraction> const & vect)
 {
+    if (vect.size() < nbVariables)
+        cerr << "attention, vecteur trop court pour initialiser la variable" << endl;
     for (int k = 0; k <= nbVariables; k++)
         (coeffs[i][k]).copie(vect[k]);
     basic[i] = true;

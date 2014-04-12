@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include"fractions.cpp"
+#include"fractions.hpp"
 #include"dict.hpp"
 
 
@@ -9,36 +9,44 @@ using namespace std;
 
 int main()
 {
-    Fraction f1(4,1);
-    Fraction f2(5,7);
-    Fraction f3(-6,-14);
+    Dict dico(4);
 
-    f1.Fraction::printFraction();
-    cout << endl;
-    f2.Fraction::printFraction();
-    cout << endl;
-    f3.Fraction::printFraction();
-    cout << endl;
+    vector<Fraction> vect1;
+    vect1.push_back(Fraction(4));
+    vect1.push_back(Fraction(2));
+    vect1.push_back(Fraction(1,4));
+    vect1.push_back(Fraction());
+    vect1.push_back(Fraction());
+    vector<Fraction> vect2;
+    vect2.push_back(Fraction(3,2));
+    vect2.push_back(Fraction(2,4));
+    vect2.push_back(Fraction(1));
+    vect2.push_back(Fraction());
+    vect2.push_back(Fraction());
+    vector<Fraction> vect3;
+    vect3.push_back(Fraction(5,4));
+    vect3.push_back(Fraction(3));
+    vect3.push_back(Fraction(1,4));
+    vect3.push_back(Fraction());
+    vect3.push_back(Fraction());
 
-    f1.Fraction::oppose();
-    f1.Fraction::printFraction();
-    cout << endl;
+    cout << "coucou, "; (dico.coeffs)[0][0].printFraction();
 
-    f3.Fraction::reduction();
-    f3.Fraction::printFraction();
-    cout << endl;
+    cerr << "coucou1 " << endl;
 
-    f2.Fraction::div(f3);
-    f2.Fraction::printFraction();
-    f3.Fraction::printFraction();
-    cout << endl;
+    dico.setBasicVar(3, vect1);
 
-    f3.Fraction::soustraction(f2);
-    f2.Fraction::printFraction();
-    f3.Fraction::printFraction();
-    cout << endl;
+    cerr << "coucou2 " << endl;
 
-    cout << endl << endl;
+    dico.setBasicVar(4,vect2);
+
+    cerr << "coucou3 " << endl;
+    dico.setObjectif(vect3);
+
+    cerr << "coucou4 " << endl;
+
+    dico.printDict();
+
 
     cout << "Hello world!" << endl;
     return 0;

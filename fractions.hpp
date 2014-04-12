@@ -14,6 +14,8 @@ class Fraction
         int denom;
 
     public:
+        Fraction() { num = 0; denom = 1;}
+
         Fraction(int a, int b = 1) {
             num = a;
             denom = b;

@@ -20,7 +20,14 @@ class Dict
 
         Dict(int n) {
             nbVariables = n;
-            //TODO initialiser les vecteurs avec des false et des 0
+
+            for (int k = 0; k <=n; k++)
+            {
+                basic.push_back(false);
+                vector<Fraction> tmp (n+1, Fraction());
+                coeffs.push_back(tmp);
+                objectif.push_back(Fraction());
+            }
 
         }
 
