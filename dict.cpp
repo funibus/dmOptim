@@ -133,9 +133,8 @@ int Dict::choixEntranteMax()
     return res;
 }
 
-void Dict::simplexUnePhase()
+void Dict::petitSimplex1Phase()
 {
-    std::cout << "Le dictionnaire initial est " << std::endl;
     this->printDict();
 
     int entrante = this->choixEntranteBland();
@@ -152,12 +151,46 @@ void Dict::simplexUnePhase()
         else
         {
             std::cout << "Variable entrante : x_" << entrante << std::endl;
-            std::cout << "Variable sortante : x_" << sortante << std::endl;
+            std::cout << "Variable sortante : x_" << sortante << std::endl << std::endl;
             this->grosPivot(sortante, entrante);
             this->printDict();
         }
         entrante = this->choixEntranteBland();
     }
+}
+
+void Dict::premierePhase()
+{
+    Fraction minB(0);
+    int minK = -1;
+    for (int k = 1; k <= nbVariables; k++)
+        if (coeffs[k][0].strictInf(minB) )
+        {
+            minB.copie(coeffs[k][0]);
+            minK = k;
+        }
+    if (minK == -1)
+    {
+        std::cerr << "Pas besoin de premiere phase" << std::endl;
+        return;
+    }
+
+    this->grosPivot(minK,nbVariables); //premier pivot qui n'en est pas vraiemnt un
+
+    this->petitSimplex1Phase(); //on resout la premiere phase
+
+    if (objectif[0].nonZero() == false && basic[nbVariables]) //si x0 est toujours une variable basique, il faut refaire un pivot avant de le supprimer
+    {
+        int k = 1;
+        while (coeffs[nbVariables][k].nonZero() == false && k < nbVariables)
+            k++;
+        if (k == nbVariables)
+            std::cerr << "ca c'est vraiment bizarre" << std::endl;
+        else
+            this->grosPivot(nbVariables, k);
+    }
+
+    nbVariables--; //on supprime x0
 }
 
 void Dict::printDict()
@@ -177,7 +210,7 @@ void Dict::printDict()
                     else
                         cout << " +";
 
-                    if (coeffs[k][l].getNum() != 1 || coeffs[k][l].getDenom() != 1)
+                    if (coeffs[k][l].getNum() != 1 || coeffs[k][l].getDenom() != 1 || l == 0)
                         coeffs[k][l].printFraction();
                     if (l != 0) //si c'est le coeff constant pas de variable
                         std::cout << " x_" << l;
@@ -199,8 +232,7 @@ void Dict::printDict()
                 premVar = false;
             else
                 cout << " +";
-
-            if (objectif[l].getNum() != 1 || objectif[l].getDenom() != 1)
+            if (objectif[l].getNum() != 1 || objectif[l].getDenom() != 1 || l == 0)
                 objectif[l].printFraction();
             if (l != 0) //si c'est le coeff constant pas de variable
                 std::cout << " x_" << l;

@@ -45,7 +45,9 @@ class Dict
         int choixSortanteBland(int entrante); //-1 si pas de variables sortantes
         int choixEntranteMax();
 
-        void simplexUnePhase();
+        void petitSimplex1Phase();
+
+        void premierePhase();
 
         void printDict();
 
