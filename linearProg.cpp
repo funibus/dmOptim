@@ -49,20 +49,29 @@ bool Lp::besoinPremierePhase()
 
 Dict Lp::simplex()
 {
-    Dict dico(nbVar+nbContraintes+1);
+    if (affichage)
+        this->printLp();
+
+    Dict dico(nbVar+nbContraintes+1, affichage, regleBland);
+    int nonBorne;
 
     if (this->besoinPremierePhase())
     {
-        std::cout << "*****Premiere phase (x0 = x_" << nbVar+nbContraintes+1 << ")*****" << std::endl << std::endl;
+        if (affichage)
+            std::cout << "*****Premiere phase (x0 = x_" << nbVar+nbContraintes+1 << ")*****" << std::endl << std::endl;
 
         this->dictFromLp2Phase(dico);
-        std::cout << "Le dictionnaire initial est " << std::endl;
-        dico.printDict();
+        if (affichage)
+        {
+            std::cout << "Le dictionnaire initial est " << std::endl;
+            dico.printDict();
+        }
         dico.premierePhase();
 
-        if (objectif[0].nonZero())
+        if ((dico.objectif)[0].nonZero())
         {
-            std::cerr << "pas de solutions" << std::endl;
+            if (affichage)
+                this->certifVide(dico);
             return dico;
         }
 
@@ -73,7 +82,8 @@ Dict Lp::simplex()
             for (int k = 1; k <= nbVar; k++)
                 if (dico.basic[k])
                     dico.remplaceVarObj(k);
-            std::cout << "*****Deuxieme phase*****" << std::endl << std::endl;
+            if (affichage)
+                std::cout << "*****Deuxieme phase*****" << std::endl << std::endl;
         }
     }
 
@@ -84,9 +94,139 @@ Dict Lp::simplex()
     }
 
     //2eme phase du simplex (commune)
-    std::cout << "Le dictionnaire initial est " << std::endl;
-    dico.petitSimplex1Phase();
+    if (affichage)
+        std::cout << "Le dictionnaire initial est " << std::endl;
+    nonBorne = dico.petitSimplex1Phase();
+
+    if (affichage)
+    {
+        if (nonBorne == -1)
+            this->certifOpt(dico);
+        else
+            this->certifNonBorne(dico, nonBorne);
+    }
     return dico;
+}
+
+
+void Lp::certifVide(Dict dico)
+{
+    std::cout << "Le domaine est vide" << std::endl << "Nombre de pivots : " << dico.nbPivots << std::endl;
+    std::cout << "Certificat : " << std::endl;
+    bool prem = true;
+    vector<Fraction> certif(nbVar+1);
+    for (int k = nbVar+1; k <= dico.nbVariables; k++)
+    {
+        if ((dico.objectif)[k].nonZero ())
+        {
+            Fraction tmp((dico.objectif)[k]);
+            tmp.oppose();
+            if (prem)
+                prem = false;
+            else
+                std::cout << " +" ;
+            tmp.printFraction();
+            std::cout << " contrainte " << k-nbVar;
+            for (int j = 0; j <= nbVar; j++)
+            {
+                Fraction tmp2 (coeffs[k-nbVar-1][j]);
+                tmp2.mult(tmp);
+                certif[j].add(tmp2);
+            }
+        }
+    }
+
+    std::cout << std::endl << "Ce qui donne : ";
+    for (int j = 1; j <= nbVar; j++)
+    {
+        if (j != 1)
+            std::cout << " +";
+        certif[j].printFraction();
+        std::cout << " x_" << j;
+    }
+    std::cout << " <=";
+    certif[0].printFraction();
+    std::cout << std::endl << std::endl;
+}
+
+void Lp::certifOpt(Dict dico)
+{
+    std::cout << "Une solution optimale est :";
+    for (int k = 1; k <= nbVar; k++)
+    {
+        if (k != 1)
+            std::cout << ",";
+        std::cout << " x_" << k << " =";
+        (dico.coeffs)[k][0].printFraction();
+    }
+
+    std::cout << std::endl << "La valeur de cette solution est :";
+    (dico.objectif)[0].printFraction();
+
+    std::cout << std::endl << "Nombre de pivots : " << dico.nbPivots;
+    std::cout << std::endl << "Le certificat d'optimalite est :";
+    bool prem = true;
+    vector<Fraction> certif(nbVar+1);
+    for (int k = nbVar+1; k <= dico.nbVariables; k++)
+    {
+        if ((dico.objectif)[k].nonZero ())
+        {
+            Fraction tmp((dico.objectif)[k]);
+            tmp.oppose();
+            if (prem)
+                prem = false;
+            else
+                std::cout << " +" ;
+            tmp.printFraction();
+            std::cout << " contrainte " << k-nbVar;
+            for (int j = 0; j <= nbVar; j++)
+            {
+                Fraction tmp2 (coeffs[k-nbVar-1][j]);
+                tmp2.mult(tmp);
+                certif[j].add(tmp2);
+            }
+        }
+    }
+
+    std::cout << std::endl << "Ce qui donne : ";
+    for (int j = 1; j <= nbVar; j++)
+    {
+        if (j != 1)
+            std::cout << " +";
+        certif[j].printFraction();
+        std::cout << " x_" << j;
+    }
+    std::cout << " <=";
+    certif[0].printFraction();
+    std::cout << std::endl << std::endl;
+}
+
+void Lp::certifNonBorne(Dict dico, int nonBorne)
+{
+    std::cout << "Solution non bornee" << std::endl;
+    std::cout << "Nombre de pivots : " << dico.nbPivots << std::endl << "Certificat :";
+
+    if (nonBorne <= nbVar)
+        std::cout << " augmenter x_" << nonBorne << " jusqu'a l'infini" << std::endl << std::endl;
+    else
+    {
+        std::cout << " prendre";
+        for (int j = 1; j <= nbVar; j++)
+        {
+            if (j != 1)
+                std::cout << ",";
+            std::cout << " x_" << j << " =";
+            (dico.coeffs)[j][0].printFraction();
+            if ((dico.basic)[j] && (dico.coeffs)[j][nonBorne].nonZero() )
+            {
+                std::cout << " +";
+                (dico.coeffs)[j][nonBorne].printFraction();
+                std::cout << " k";
+            }
+        }
+
+        std::cout << " et faire tendre k vers l'infini" << std::endl << std::endl;
+    }
 }
 
 void Lp::printLp()

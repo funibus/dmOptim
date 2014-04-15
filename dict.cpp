@@ -133,30 +133,42 @@ int Dict::choixEntranteMax()
     return res;
 }
 
-void Dict::petitSimplex1Phase()
+int Dict::petitSimplex1Phase()
 {
-    this->printDict();
+    if (affichage)
+        this->printDict();
 
-    int entrante = this->choixEntranteBland();
+    int entrante;
+    if (regleBland)
+        entrante = this->choixEntranteBland();
+    else
+        entrante = this->choixEntranteMax();
+
     int sortante = -1;
 
     while (entrante != -1)
     {
         sortante = this->choixSortanteBland(entrante);
         if (sortante == -1)
-        {
-            std::cout << "solution non bornee : augmenter variable x_" << entrante << "jusqu'a l'infini" << std::endl;
-            return;
-        }
+            return entrante;
         else
         {
-            std::cout << "Variable entrante : x_" << entrante << std::endl;
-            std::cout << "Variable sortante : x_" << sortante << std::endl << std::endl;
+            if (affichage)
+            {
+                std::cout << "Variable entrante : x_" << entrante << std::endl;
+                std::cout << "Variable sortante : x_" << sortante << std::endl << std::endl;
+            }
             this->grosPivot(sortante, entrante);
-            this->printDict();
+            if (affichage)
+                this->printDict();
+            nbPivots++;
         }
-        entrante = this->choixEntranteBland();
+        if (regleBland)
+            entrante = this->choixEntranteBland();
+        else
+            entrante = this->choixEntranteMax();
     }
+    return -1;
 }
 
 void Dict::premierePhase()
@@ -175,6 +187,11 @@ void Dict::premierePhase()
         return;
     }
 
+    if (affichage)
+    {
+        std::cout << "Variable entrante : x_" << nbVariables << std::endl;
+        std::cout << "Variable entrante : x_" << minK << std::endl << std::endl;
+    }
     this->grosPivot(minK,nbVariables); //premier pivot qui n'en est pas vraiemnt un
 
     this->petitSimplex1Phase(); //on resout la premiere phase

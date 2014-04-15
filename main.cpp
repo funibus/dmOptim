@@ -10,14 +10,14 @@ using namespace std;
 
 int main()
 {
-    Lp programme(2,3);
+    Lp programme(2,3, true, false);
 
     vector<Fraction> vect1;
-    vect1.push_back(Fraction(-1));
+    vect1.push_back(Fraction(1));
     vect1.push_back(Fraction(1));
     vect1.push_back(Fraction(-1));
     vector<Fraction> vect2;
-    vect2.push_back(Fraction(-3));
+    vect2.push_back(Fraction(3));
     vect2.push_back(Fraction(-1));
     vect2.push_back(Fraction(-1));
     vector<Fraction> vect3;
@@ -30,14 +30,11 @@ int main()
     (programme.coeffs).push_back(vect3);
 
     (programme.objectif).push_back(Fraction());
-    (programme.objectif).push_back(Fraction(3));
     (programme.objectif).push_back(Fraction(1));
+    (programme.objectif).push_back(Fraction(2));
 
-    programme.printLp();
 
     Dict dicoFinal = programme.simplex();
 
-
-    cout << "Hello world!" << endl;
     return 0;
 }

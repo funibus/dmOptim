@@ -18,8 +18,15 @@ class Dict
         vector< vector<Fraction> > coeffs; //si basic[i] = true, le vecteur i contient les coeffs des variables dans l'equation xi = ...
         vector<Fraction> objectif; //contient les coefficients de la fonction objectif
 
-        Dict(int n) {
+        bool affichage; //mettre affichage a false si on ne veut pas d'affichage
+        int nbPivots;
+        bool regleBland; //mettre a false si on veut utiliser la regle du max
+
+        Dict(int n, bool aff = true, bool regle = true) {
             nbVariables = n;
+            affichage = aff;
+            regleBland = regle;
+            nbPivots = 0;
 
             for (int k = 0; k <=n; k++)
             {
@@ -45,7 +52,7 @@ class Dict
         int choixSortanteBland(int entrante); //-1 si pas de variables sortantes
         int choixEntranteMax();
 
-        void petitSimplex1Phase();
+        int petitSimplex1Phase(); //renvoie -1 s'il y a une sol opt, le numero de la variable qui peut augmenter sinon
 
         void premierePhase();
 

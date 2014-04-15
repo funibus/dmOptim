@@ -16,14 +16,21 @@ class Lp
         vector< vector<Fraction> > coeffs; //coeff[i][j] contient le coeff de xj dans la ieme contrainte, et coeff[i][0] = bi
         vector<Fraction> objectif; //contient les coefficients de la fonction objectif
 
+        bool affichage;
+        bool regleBland;
+
         Lp() {
             nbVar = 0;
             nbContraintes = 0;
+            affichage = true;
+            regleBland = true;
         }
 
-        Lp(int var, int contraintes) {
+        Lp(int var, int contraintes, bool aff = true, bool regle = true) {
             nbVar = var;
             nbContraintes = contraintes;
+            affichage = aff;
+            regleBland = regle;
         }
 
         void dictFromLp1Phase(Dict & dico);
@@ -33,6 +40,10 @@ class Lp
         void printLp();
 
         Dict simplex();
+
+        void certifVide(Dict dico); //prend un dico final qui prouve que c'est vide
+        void certifOpt(Dict dico); //prend le dico final
+        void certifNonBorne(Dict dico, int nonBorne); //prend un dico final, et une variable non bornee
 
 };
 
