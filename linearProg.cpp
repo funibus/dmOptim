@@ -50,7 +50,10 @@ bool Lp::besoinPremierePhase()
 Dict Lp::simplex()
 {
     if (affichage)
+    {
+        std::cout << "Le programme est :" << std::endl << std::endl;
         this->printLp();
+    }
 
     Dict dico(nbVar+nbContraintes+1, affichage, regleBland);
     int nonBorne;
