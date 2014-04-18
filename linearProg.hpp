@@ -26,7 +26,7 @@ class Lp
             regleBland = true;
         }
 
-        Lp(int var, int contraintes, bool aff = true, bool regle = true) {
+        Lp(int var = 0, int contraintes = 0, bool aff = true, bool regle = true) {
             nbVar = var;
             nbContraintes = contraintes;
             affichage = aff;

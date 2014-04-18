@@ -4,11 +4,12 @@
 #include"fractions.hpp"
 #include"dict.hpp"
 #include"linearProg.hpp"
+#include "parser.hpp"
 
 
 using namespace std;
 
-int main()
+/*int main()
 {
     Lp programme(2,3, true, false);
 
@@ -37,4 +38,24 @@ int main()
     Dict dicoFinal = programme.simplex();
 
     return 0;
+}*/
+
+int main()
+{
+    //while (true)
+    {
+        cout << "entrer un nombre " << endl;
+        int n;
+        cin >> n;
+        cout << "entre : " << n << endl;
+    }
+
+    cout << "entrer une fraction" << endl;
+    char c;
+    //Fraction frac = lireFrac(cin, c);
+    cout << "carac suivant = " << c << "et fraction = ";
+    //frac.printFraction();
+    cout << endl;
+    return 0;
+
 }
