@@ -42,20 +42,15 @@ using namespace std;
 
 int main()
 {
-    //while (true)
-    {
-        cout << "entrer un nombre " << endl;
-        int n;
-        cin >> n;
-        cout << "entre : " << n << endl;
-    }
+    ParserFich fichier("../dmOptim/toto.txt");
+    char c = 't';
+    Lp linearProg(0,0);
 
-    cout << "entrer une fraction" << endl;
-    char c;
-    //Fraction frac = lireFrac(cin, c);
-    cout << "carac suivant = " << c << "et fraction = ";
-    //frac.printFraction();
-    cout << endl;
+    fichier.lireObj(linearProg);
+
+    cout << "nb de variables : " << linearProg.nbVar << endl;
+    linearProg.printLp();
+
     return 0;
 
 }

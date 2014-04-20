@@ -7,10 +7,31 @@
 
 using namespace std;
 
-int nouvelleVar(string s, vector<string> & variables); //renvoie la position de s dans variables, -1 s'il y est pas
-char caractSuivant(ifstream &entree);
-Fraction lireFrac(ifstream &entree, char &carSuiv);
+class ParserFich
+{
+    public:
 
-void lireObj(ifstream &entree, vector<Fraction> & obj, vector<string> & listVar);
+        char* nomFichier;
+        ifstream entree;
+        vector<string> listeVar;
+
+        ParserFich(char* nom)
+        {
+            nomFichier = nom;
+            entree.open(nomFichier, ios::in);
+            if (!entree)
+                cerr << "attention, ouverture de " << nomFichier << " ratee" << endl;
+        }
+
+        int trouverVar(string s); //renvoie la position de s dans variables, -1 s'il y est pas
+        char caractSuivant();
+        Fraction lireFrac(char &carSuiv);
+        void lireObj(Lp & linearProg);
+        void lireContraintes(Lp & linearProg);
+
+};
+
+
+
 
 #endif // PARSER_HPP_INCLUDED
