@@ -234,6 +234,28 @@ void Lp::certifNonBorne(Dict dico, int nonBorne)
     }
 }
 
+void Lp::randomLp(int maxCoeff)
+{
+    for (int i = 0; i <= nbVar; i++)
+    {
+        int alea = rand() % (2*maxCoeff+1);
+        alea -= maxCoeff;
+        objectif.push_back(Fraction(alea));
+    }
+
+    for (int j = 0; j < nbContraintes; j++)
+    {
+        vector<Fraction> tmpVect;
+        for (int i = 0; i <= nbVar; i++)
+        {
+            int alea = rand() % (2*maxCoeff+1);
+            alea -= maxCoeff;
+            tmpVect.push_back(Fraction(alea));
+        }
+        coeffs.push_back(tmpVect);
+    }
+}
+
 void Lp::printLp()
 {
     std::cout << "Maximiser ";

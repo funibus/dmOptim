@@ -7,6 +7,8 @@
 #include"fractions.hpp"
 #include "dict.hpp"
 
+//TODO include le bon truc
+
 class Lp
 {
     public:
@@ -44,6 +46,8 @@ class Lp
         void certifVide(Dict dico); //prend un dico final qui prouve que c'est vide
         void certifOpt(Dict dico); //prend le dico final
         void certifNonBorne(Dict dico, int nonBorne); //prend un dico final, et une variable non bornee
+
+        void randomLp(int maxCoeff);//demande un Lp avec deja nbVar et nbContraintes renplis
 
 };
 
