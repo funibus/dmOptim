@@ -25,7 +25,7 @@ class ParserFich
 
         int trouverVar(string s); //renvoie la position de s dans variables, -1 s'il y est pas
         char caractSuivant();
-        Fraction lireFrac(char &carSuiv);
+        Fraction lireFrac();
         void lireObj(Lp & linearProg);
         void lireContraintes(Lp & linearProg);
 

@@ -45,9 +45,27 @@ int main()
     ParserFich fichier("../dmOptim/toto.txt");
     Lp linearProg(0,0);
 
+    /*char toto = (fichier.entree).peek();
+    cout << "coucou, toto = " << toto << endl;
+
+    string toto1;
+    fichier.entree >> toto1;
+    cout << "toto1 = " << toto1 << endl;
+
+    int titi;
+    fichier.entree >> titi;
+    cout << "titi = " << titi << endl;
+    for (int i = 0; i < 5; i++)
+    {
+        Fraction tutu = fichier.lireFrac();
+        cout << "fraction = ";
+        tutu.printFraction();
+        cout << endl;
+    }*/
+
     fichier.lireObj(linearProg);
     linearProg.printLp();
-    //fichier.lireContraintes(linearProg);
+    fichier.lireContraintes(linearProg);
 
     cout << "nb de variables : " << linearProg.nbVar << endl;
     linearProg.printLp();
