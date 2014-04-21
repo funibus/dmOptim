@@ -43,10 +43,11 @@ using namespace std;
 int main()
 {
     ParserFich fichier("../dmOptim/toto.txt");
-    char c = 't';
     Lp linearProg(0,0);
 
     fichier.lireObj(linearProg);
+    linearProg.printLp();
+    //fichier.lireContraintes(linearProg);
 
     cout << "nb de variables : " << linearProg.nbVar << endl;
     linearProg.printLp();
