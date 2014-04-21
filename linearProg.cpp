@@ -191,11 +191,13 @@ void Lp::certifOpt(Dict dico)
         }
     }
 
+    certif[0].add(this->objectif[0]); //pas oublier le coeff constant de la fct objectif
+
     std::cout << std::endl << "Ce qui donne : ";
+    objectif[0].printFraction();
     for (int j = 1; j <= nbVar; j++)
     {
-        if (j != 1)
-            std::cout << " +";
+        std::cout << " +";
         certif[j].printFraction();
         std::cout << " x_" << j;
     }
