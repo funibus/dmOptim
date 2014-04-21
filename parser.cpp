@@ -14,14 +14,14 @@ char ParserFich::caractSuivant() //ignore juste les blancs, pas les retours a la
 {
     char c;
     entree.get(c);
-    cout << "coucou je suis dans la fonction" << endl;
+    //cout << "coucou je suis dans la fonction" << endl;
     while (c == ' ')
     {
-        cout << "coucou, je viens de voir un blanc" << endl;
-        if (c == '\n')
-            cout << "c++ il fait n'importe quoi" << endl;
-        if (c == ' ')
-            cout << "coucou, je lis un blanc" << endl;
+        //cout << "coucou, je viens de voir un blanc" << endl;
+        //if (c == '\n')
+            //cout << "c++ il fait n'importe quoi" << endl;
+        //if (c == ' ')
+            //cout << "coucou, je lis un blanc" << endl;
         entree.get(c);
     }
     return c;
@@ -53,13 +53,15 @@ void ParserFich::lireObj(Lp & linearProg) //obj et listVar sont vides au debut
     char carSuiv = 'a';
     char cartmp = 'a';
     bool prem = true; //gerer le cas ou il y a un coeff constant dans la fonction obj ou pas
-    while (carSuiv != '\n' && carSuiv != EOF)
+    //while (carSuiv != '\n' && carSuiv != EOF)
+    for (int i = 0; i < 5; i++)
     {
         cerr << "coucou, carSuiv = " << carSuiv << endl;
         Fraction tmp = this->lireFrac(cartmp);
         if (carSuiv == '-') //on avait un - avant la fraction
             tmp.oppose();
         carSuiv = cartmp;
+        cout << "apres fraction, carSuiv = " << carSuiv << endl;
         if (prem)
         {
             cout << "coucou, caract suivant == " << carSuiv << endl;
@@ -69,15 +71,19 @@ void ParserFich::lireObj(Lp & linearProg) //obj et listVar sont vides au debut
             {
                 (linearProg.objectif).push_back(tmp);
                 tmp.copie(this->lireFrac(carSuiv) );
+                cout << "coeff constant, carSuiv = " << carSuiv << endl;
             }
             prem = false;
         }
-        entree.seekg(-2, ios::cur);
+        entree.seekg(-4, ios::cur);
         string var;
         entree >> var;
+        cout << "var = " << var << endl;
         int pos = this->trouverVar(var);
         if (pos == -1)
         {
+            cout << "nouvelle var : " << var << endl;
+            listeVar.push_back(var);
             (linearProg.objectif).push_back(tmp);
             linearProg.nbVar++;
         }
