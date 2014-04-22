@@ -171,3 +171,49 @@ void ParserFich::lireContraintes(Lp & linearProg)
     for (int j = (linearProg.objectif).size(); j <= linearProg.nbVar; j++)
         (linearProg.objectif).push_back(Fraction ());
 }
+
+void ParserFich::parseTranspo( Transportation & transpo)
+{
+    int N1,N2;
+    entree >> N1 >> N2;
+    transpo.nbProd = N1;
+    transpo.nbDist = N2;
+
+    for (int i = 0; i < transpo.nbProd; i++)
+    {
+        vector<int> lignei;
+        for (int j = 0; j < transpo.nbDist; j++)
+        {
+            int tmpInt;
+            entree >> tmpInt;
+            lignei.push_back(tmpInt);
+        }
+        (transpo.matCout).push_back(lignei);
+    }
+
+    string toto;
+
+    //lecture des capacites des sites de production
+    entree >> toto;
+    if (toto != "production:")
+        cerr << "attention, probleme de parsage, capacites des sites de production pas reconnues" << endl;
+    for (int i = 0; i < transpo.nbProd; i++)
+    {
+        int capa;
+        entree >> capa;
+        (transpo.capaProd).push_back(capa);
+    }
+
+    //lecture des capacites des sites de distribution
+    entree >> toto;
+    if (toto != "distribution:")
+        cerr << "attention, probleme de parsage, objectif des sites de distribution pas reconnu" << endl;
+    for (int j = 0; j < transpo.nbDist; j++)
+    {
+        int obj;
+        entree >> obj;
+        (transpo.objDist).push_back(obj);
+    }
+
+    entree.close();
+}

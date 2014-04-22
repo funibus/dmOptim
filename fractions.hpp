@@ -10,13 +10,13 @@ using namespace std;
 class Fraction
 {
     private:
-        int num;
-        int denom;
+        long long num;
+        long long denom;
 
     public:
         Fraction() { num = 0; denom = 1;}
 
-        Fraction(int a, int b = 1) {
+        Fraction(long long a, long long b = 1) {
             num = a;
             denom = b;
             if (b == 0)
@@ -27,10 +27,10 @@ class Fraction
 
         }
 
-        int getNum() {return num;} ;
-        int getDenom() {return denom;} ;
-        void setNum(int a) {num = a;} ;
-        void setDenom(int b) {denom = b;} ;
+        long long getNum() {return num;} ;
+        long long getDenom() {return denom;} ;
+        void setNum(long long a) {num = a;} ;
+        void setDenom(long long b) {denom = b;} ;
         void setZero() {num = 0; denom = 1;};
         bool nonZero() {return num != 0;};
         bool estPositif() {return (num > 0 && denom > 0) || (num < 0 && denom < 0);};
@@ -39,7 +39,7 @@ class Fraction
 
         Fraction clone() {Fraction f(num, denom); return f;};
         void copie(Fraction f) {num = f.getNum(); denom = f.getDenom();};
-        void change(int a, int b) {num = a; denom = b;};
+        void change(long long a, long long b) {num = a; denom = b;};
 
         void inverse();
         void oppose() {num = -num;};
@@ -51,7 +51,7 @@ class Fraction
 
         void printFraction();
 
-        static int PGCD(int a, int b);
+        static long long PGCD(long long a, long long b);
 
 
 };

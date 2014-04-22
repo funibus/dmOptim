@@ -1,12 +1,12 @@
 #include"fractions.hpp"
 
-int Fraction::PGCD(int a, int b)
+long long Fraction::PGCD(long long a, long long b)
 {
     if (b == 0)
         return a;
     else
     {
-        int r = a%b;
+        long long r = a%b;
         return PGCD(b,r);
     }
 }
@@ -14,7 +14,7 @@ int Fraction::PGCD(int a, int b)
 
 void Fraction::reduction()
 {
-    int d = Fraction::PGCD(num, denom);
+    long long d = Fraction::PGCD(num, denom);
     if (d == 0)
     {
         cerr << "attention, reduction d'une fraction nulle" << endl;
@@ -31,7 +31,7 @@ void Fraction::inverse()
         cerr << "attention, inversion d'une fraction nulle, fraction non inversee" << endl;
     else
     {
-        int tmp = denom;
+        long long tmp = denom;
         denom = num;
         num = tmp;
     }
@@ -40,8 +40,8 @@ void Fraction::inverse()
 
 void Fraction::mult(Fraction f)
 {
-    int num2 = f.getNum();
-    int denom2 = f.getDenom();
+    long long num2 = f.getNum();
+    long long denom2 = f.getDenom();
 
     num *= num2;
     denom *= denom2;
@@ -51,8 +51,8 @@ void Fraction::mult(Fraction f)
 
 void Fraction::div(Fraction f)
 {
-    int num2 = f.getNum();
-    int denom2 = f.getDenom();
+    long long num2 = f.getNum();
+    long long denom2 = f.getDenom();
 
     if (num2 == 0)
         cerr << "attention, division par une fraction nulle, division annulee" << endl;
@@ -67,8 +67,8 @@ void Fraction::div(Fraction f)
 
 void Fraction::add(Fraction f)
 {
-    int num2 = f.getNum();
-    int denom2 = f.getDenom();
+    long long num2 = f.getNum();
+    long long denom2 = f.getDenom();
 
     num = num2*denom+denom2*num;
     denom *= denom2;
@@ -78,8 +78,8 @@ void Fraction::add(Fraction f)
 
 void Fraction::soustraction(Fraction f)
 {
-    int num2 = -f.getNum();
-    int denom2 = f.getDenom();
+    long long num2 = -f.getNum();
+    long long denom2 = f.getDenom();
 
     num = num2*denom+denom2*num;
     denom *= denom2;

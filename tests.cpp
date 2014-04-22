@@ -18,7 +18,7 @@ int test(int var, int contraintes)
 {
     Lp linearProg(var,contraintes, false, true);
     linearProg.randomLp(coeffMax);
-    linearProg.printLp();
+    //linearProg.printLp();
 
     Dict dicoFinal = linearProg.simplex();
 
@@ -26,7 +26,7 @@ int test(int var, int contraintes)
 
 }
 
-Fraction plusieursTests(int nbTests, int var, int contraintes)
+double plusieursTests(int nbTests, int var, int contraintes)
 {
     int totalPivots = 0;
     for (int i = 0; i < nbTests; i++)
@@ -34,7 +34,7 @@ Fraction plusieursTests(int nbTests, int var, int contraintes)
         totalPivots += test(var, contraintes);
     }
 
-    return Fraction(totalPivots, nbTests);
+    return (double)totalPivots/(double)nbTests;
 }
 
 void totalTests()
@@ -43,13 +43,12 @@ void totalTests()
     srand(0);
     for (int var = 5; var <= 50; var += 5)
     {
-        for (int contraintes = 5; contraintes <= 5; contraintes += 5)
+        for (int contraintes = 5; contraintes <= 50; contraintes += 5)
         {
-            Fraction tmp = plusieursTests(100, var, contraintes);
-            tmp.reduction();
+            int nbTests = 101-(var*contraintes)/25;
+            double tmp = plusieursTests(nbTests, var, contraintes);
             cout << "Pour " << var << " variables et " << contraintes << " contraintes, nb moyen de pivots = ";
-            tmp.printFraction();
-            cout << endl;
+            cout << tmp  << " pour " << nbTests << " tests"<< endl;
         }
     }
 }

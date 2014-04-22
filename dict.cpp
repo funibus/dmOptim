@@ -96,7 +96,7 @@ int Dict::choixSortanteBland(int entrante)
 {
     int k = 1;
     int res = -1;
-    Fraction rapportMin(0,1);
+    Fraction rapportMin(-1,1);
     while (k <= nbVariables)
     {
         if (basic[k] && coeffs[k][entrante].estNegatif())
@@ -105,7 +105,7 @@ int Dict::choixSortanteBland(int entrante)
             rapport.oppose();
             rapport.div(coeffs[k][entrante]);
 
-            if (rapportMin.nonZero() == false || rapport.strictInf(rapportMin))
+            if (rapportMin.estNegatif() == true || rapport.strictInf(rapportMin))
             {
                 rapportMin.copie(rapport);
                 res = k;

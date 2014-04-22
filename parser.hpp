@@ -4,6 +4,7 @@
 #include<fstream>
 #include"fractions.hpp"
 #include"linearProg.hpp"
+#include"transportation.hpp"
 
 using namespace std;
 
@@ -28,6 +29,8 @@ class ParserFich
         Fraction lireFrac();
         void lireObj(Lp & linearProg);
         void lireContraintes(Lp & linearProg);
+
+        void parseTranspo( Transportation & transpo);
 
 };
 
