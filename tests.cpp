@@ -1,3 +1,5 @@
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>
 #include <iostream>
 #include <vector>
 #include <utility>
@@ -5,11 +7,12 @@
 #include"dict.hpp"
 #include"linearProg.hpp"
 #include "parser.hpp"
+#include "tests.hpp"
 
 
 using namespace std;
 
-const coeffMax = 10;
+const int coeffMax = 10;
 
 int test(int var, int contraintes)
 {
@@ -36,12 +39,12 @@ Fraction plusieursTests(int nbTests, int var, int contraintes)
 
 void totalTests()
 {
-    srand(time(NULL)); //TODO initialiser srand
+    srand(time(NULL));
     for (int var = 5; var <= 50; var += 5)
     {
         for (int contraintes = 5; contraintes <= 5; contraintes += 5)
         {
-            Fraction tmp = plusieursTests(10, var, contraintes);
+            Fraction tmp = plusieursTests(100, var, contraintes);
             tmp.reduction();
             cout << "Pour " << var << " variables et " << contraintes << " contraintes, nb moyen de pivots = ";
             tmp.printFraction();

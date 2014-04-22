@@ -1,13 +1,13 @@
 #ifndef LINEARPROG_HPP_INCLUDED
 #define LINEARPROG_HPP_INCLUDED
 
+#include<stdlib.h>
 #include <iostream>
 #include <vector>
 #include <utility>
 #include"fractions.hpp"
 #include "dict.hpp"
 
-//TODO include le bon truc
 
 class Lp
 {
