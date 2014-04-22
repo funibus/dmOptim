@@ -1,0 +1,93 @@
+Le programme est :
+
+Maximiser  0 + 100 x_1 + 10 x_2 + 1 x_3
+Tel que
+ 1 x_1 + 0 x_2 + 0 x_3 <= 1
+ 20 x_1 + 1 x_2 + 0 x_3 <= 100
+ 200 x_1 + 20 x_2 + 1 x_3 <= 10000
+ x_1, x_2, x_3 positifs
+
+Le dictionnaire initial est 
+x_4 =  1 + -1 x_1 + 0 x_2 + 0 x_3
+x_5 =  100 + -20 x_1 + -1 x_2 + 0 x_3
+x_6 =  10000 + -200 x_1 + -20 x_2 + -1 x_3
+-------------------------------------
+z =  0 + 100 x_1 + 10 x_2 + x_3
+
+
+Variable entrante : x_1
+Variable sortante : x_4
+
+x_1 =  1 + 0 x_2 + 0 x_3 + -1 x_4
+x_5 =  80 + -1 x_2 + 0 x_3 + 20 x_4
+x_6 =  9800 + -20 x_2 + -1 x_3 + 200 x_4
+-------------------------------------
+z =  100 + 10 x_2 + x_3 + -100 x_4
+
+
+Variable entrante : x_2
+Variable sortante : x_5
+
+x_1 =  1 + 0 x_3 + -1 x_4 + 0 x_5
+x_2 =  80 + 0 x_3 + 20 x_4 + -1 x_5
+x_6 =  8200 + -1 x_3 + -200 x_4 + 20 x_5
+-------------------------------------
+z =  900 + x_3 + 100 x_4 + -10 x_5
+
+
+Variable entrante : x_4
+Variable sortante : x_1
+
+x_2 =  100 + -20 x_1 + 0 x_3 + -1 x_5
+x_4 =  1 + -1 x_1 + 0 x_3 + 0 x_5
+x_6 =  8000 + 200 x_1 + -1 x_3 + 20 x_5
+-------------------------------------
+z =  1000 + -100 x_1 + x_3 + -10 x_5
+
+
+Variable entrante : x_3
+Variable sortante : x_6
+
+x_2 =  100 + -20 x_1 + -1 x_5 + 0 x_6
+x_3 =  8000 + 200 x_1 + 20 x_5 + -1 x_6
+x_4 =  1 + -1 x_1 + 0 x_5 + 0 x_6
+-------------------------------------
+z =  9000 + 100 x_1 + 10 x_5 + -1 x_6
+
+
+Variable entrante : x_1
+Variable sortante : x_4
+
+x_1 =  1 + -1 x_4 + 0 x_5 + 0 x_6
+x_2 =  80 + 20 x_4 + -1 x_5 + 0 x_6
+x_3 =  8200 + -200 x_4 + 20 x_5 + -1 x_6
+-------------------------------------
+z =  9100 + -100 x_4 + 10 x_5 + -1 x_6
+
+
+Variable entrante : x_5
+Variable sortante : x_2
+
+x_1 =  1 + 0 x_2 + -1 x_4 + 0 x_6
+x_3 =  9800 + -20 x_2 + 200 x_4 + -1 x_6
+x_5 =  80 + -1 x_2 + 20 x_4 + 0 x_6
+-------------------------------------
+z =  9900 + -10 x_2 + 100 x_4 + -1 x_6
+
+
+Variable entrante : x_4
+Variable sortante : x_1
+
+x_3 =  10000 + -200 x_1 + -20 x_2 + -1 x_6
+x_4 =  1 + -1 x_1 + 0 x_2 + 0 x_6
+x_5 =  100 + -20 x_1 + -1 x_2 + 0 x_6
+-------------------------------------
+z =  10000 + -100 x_1 + -10 x_2 + -1 x_6
+
+
+Une solution optimale est : x_1 = 0, x_2 = 0, x_3 = 10000
+La valeur de cette solution est : 10000
+Nombre de pivots : 7
+Le certificat d'optimalite est : 1 contrainte 3
+Ce qui donne :  0 + 200 x_1 + 20 x_2 + 1 x_3 <= 10000
+

@@ -1,0 +1,75 @@
+Le programme est :
+
+Maximiser  0 + 3 x_1 + 1 x_2
+Tel que
+ 1 x_1 + -1 x_2 <= -1
+ -1 x_1 + -1 x_2 <= -3
+ 2 x_1 + 1 x_2 <= 4
+ x_1, x_2 positifs
+
+*****Premiere phase (x0 = x_6)*****
+
+Le dictionnaire initial est 
+x_3 =  -1 + -1 x_1 + x_2 + x_6
+x_4 =  -3 + x_1 + x_2 + x_6
+x_5 =  4 + -2 x_1 + -1 x_2 + x_6
+-------------------------------------
+z =  0 + 0 x_1 + 0 x_2 + -1 x_6
+
+
+Variable entrante : x_6
+Variable entrante : x_4
+
+x_3 =  2 + -2 x_1 + 0 x_2 + x_4
+x_5 =  7 + -3 x_1 + -2 x_2 + x_4
+x_6 =  3 + -1 x_1 + -1 x_2 + x_4
+-------------------------------------
+z =  -3 + x_1 + x_2 + -1 x_4
+
+
+Variable entrante : x_1
+Variable sortante : x_3
+
+x_1 =  1 + 0 x_2 + -1/2 x_3 + 1/2 x_4
+x_5 =  4 + -2 x_2 + 3/2 x_3 + -1/2 x_4
+x_6 =  2 + -1 x_2 + 1/2 x_3 + 1/2 x_4
+-------------------------------------
+z =  -2 + x_2 + -1/2 x_3 + -1/2 x_4
+
+
+Variable entrante : x_2
+Variable sortante : x_5
+
+x_1 =  1 + -1/2 x_3 + 1/2 x_4 + 0 x_5
+x_2 =  2 + 3/4 x_3 + -1/4 x_4 + -1/2 x_5
+x_6 =  0 + -1/4 x_3 + 3/4 x_4 + 1/2 x_5
+-------------------------------------
+z =  0 + 1/4 x_3 + -3/4 x_4 + -1/2 x_5
+
+
+Variable entrante : x_3
+Variable sortante : x_6
+
+x_1 =  1 + -1 x_4 + -1 x_5 + 2 x_6
+x_2 =  2 + 2 x_4 + x_5 + -3 x_6
+x_3 =  0 + 3 x_4 + 2 x_5 + -4 x_6
+-------------------------------------
+z =  0 + 0 x_4 + 0 x_5 + -1 x_6
+
+
+*****Deuxieme phase*****
+
+Le dictionnaire initial est 
+x_1 =  1 + -1 x_4 + -1 x_5
+x_2 =  2 + 2 x_4 + x_5
+x_3 =  0 + 3 x_4 + 2 x_5
+-------------------------------
+z =  5 + -1 x_4 + -2 x_5
+
+
+Une solution optimale est : x_1 = 1, x_2 = 2
+La valeur de cette solution est : 5
+Nombre de pivots : 3
+Le certificat d'optimalite est : 1 contrainte 2 + 2 contrainte 3
+Ce qui donne :  0 + 3 x_1 + 1 x_2 <= 5
+

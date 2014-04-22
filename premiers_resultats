@@ -1,0 +1,16 @@
+Pour 5 variables et 5 contraintes, nb moyen de pivots = 3.48
+Pour 5 variables et 10 contraintes, nb moyen de pivots = 3.6
+Pour 5 variables et 15 contraintes, nb moyen de pivots = 4.16
+Pour 5 variables et 20 contraintes, nb moyen de pivots = 3.47
+Pour 5 variables et 25 contraintes, nb moyen de pivots = 4.45
+Pour 5 variables et 30 contraintes, nb moyen de pivots = 4.22
+Pour 10 variables et 5 contraintes, nb moyen de pivots = 5.25
+Pour 10 variables et 10 contraintes, nb moyen de pivots = 222.82
+Pour 10 variables et 15 contraintes, nb moyen de pivots = 478.29
+Pour 10 variables et 20 contraintes, nb moyen de pivots = 577.01
+Pour 10 variables et 25 contraintes, nb moyen de pivots = 681.01
+Pour 10 variables et 30 contraintes, nb moyen de pivots = 623.82
+Pour 15 variables et 5 contraintes, nb moyen de pivots = 6.12
+Pour 15 variables et 10 contraintes, nb moyen de pivots = 943.23
+Pour 15 variables et 15 contraintes, nb moyen de pivots = 23319.5
+Pour 15 variables et 20 contraintes, nb moyen de pivots = 45778.2
