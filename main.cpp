@@ -11,9 +11,9 @@
 using namespace std;
 
 
-/*int main()
+int main()
 {
-    ParserFich fichier("../dmOptim/toto.txt");
+    ParserFich fichier("../dmOptim/tutu");
 
     Lp linearProg(0,0);
     fichier.lireObj(linearProg);
@@ -24,10 +24,10 @@ using namespace std;
 
     return 0;
 
-}*/
+}
 
-int main()
+/*int main()
 {
     totalTests();
     return 0;
-}
+}*/

@@ -1,4 +1,4 @@
-SRC1= main.cpp fractions.cpp dict.cpp
+SRC1= main.cpp fractions.cpp dict.cpp linearProg.cpp parser.cpp tests.cpp
 OBJ1= ${SRC1:.cpp=.o}
 CXX	 = g++
 LFLAGS   =

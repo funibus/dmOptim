@@ -131,6 +131,7 @@ void ParserFich::lireContraintes(Lp & linearProg)
                 listeVar.push_back(var);
                 linearProg.nbVar++;
                 tmpVect.push_back(tmp);
+                cerr << "nouvelle var : " << var  << "qui va jusque la"<< endl;
             }
             else
             {
@@ -156,8 +157,9 @@ void ParserFich::lireContraintes(Lp & linearProg)
 
         carSuiv = this->caractSuivant();
         entree.get(carSuiv);
-        //if (carSuiv != '\n')
-            //cout << "coucou, carSuiv = " << carSuiv << endl;
+        carSuiv = this->caractSuivant();
+        //if (carSuiv != EOF)
+            //cout << "coucou, carSuiv = " << carSuiv <<"jusque la" <<  endl;
     }
 
     //on complete les vecteurs avec les variables qu'on n'avait pas encore vu

@@ -39,7 +39,8 @@ Fraction plusieursTests(int nbTests, int var, int contraintes)
 
 void totalTests()
 {
-    srand(time(NULL));
+    //srand(time(NULL));
+    srand(0);
     for (int var = 5; var <= 50; var += 5)
     {
         for (int contraintes = 5; contraintes <= 5; contraintes += 5)
