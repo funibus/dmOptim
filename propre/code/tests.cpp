@@ -43,15 +43,13 @@ void totalTests()
     srand(0);
     for (int var = 5; var <= 30; var += 5)
     {
-        for (int contraintes = 5; contraintes <= 30; contraintes += 5)
+        for (int contraintes = 5; contraintes <= 50; contraintes += 5)
         {
             int nbTests = 100;
             if (var + contraintes >= 25)
-                nbTests = 15;
+                nbTests = 50;
             if (var + contraintes >= 40)
-                nbTests = 5;
-            if (var + contraintes >= 55)
-                nbTests = 2;
+                nbTests = 20;
             double tmp = plusieursTests(nbTests, var, contraintes);
             cout << "Pour " << var << " variables et " << contraintes << " contraintes, nb moyen de pivots = ";
             cout << tmp  << " pour " << nbTests << " tests"<< endl;

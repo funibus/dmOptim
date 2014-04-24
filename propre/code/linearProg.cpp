@@ -238,8 +238,9 @@ void Lp::randomLp(int maxCoeff)
 {
     for (int i = 0; i <= nbVar; i++)
     {
-        int alea = rand() % (2*maxCoeff+1);
-        alea -= maxCoeff;
+        //int alea = rand() % (2*maxCoeff+1);
+        //alea -= maxCoeff;
+		int alea = rand() %maxCoeff;
         objectif.push_back(Fraction(alea));
     }
 
@@ -248,8 +249,9 @@ void Lp::randomLp(int maxCoeff)
         vector<Fraction> tmpVect;
         for (int i = 0; i <= nbVar; i++)
         {
-            int alea = rand() % (2*maxCoeff+1);
-            alea -= maxCoeff;
+            //int alea = rand() % (2*maxCoeff+1);
+            //alea -= maxCoeff;
+			int alea = rand() %maxCoeff;
             tmpVect.push_back(Fraction(alea));
         }
         coeffs.push_back(tmpVect);

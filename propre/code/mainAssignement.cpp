@@ -35,6 +35,7 @@ int main(int argc,char *argv[])
     transpo.transpToLp(linearProg);
     Dict dico = linearProg.simplex();
     transpo.solutionTranspo(dico);
+    cout << "Nombre de pivots : " << dico.nbPivots << endl;
 
     return 0;
 
