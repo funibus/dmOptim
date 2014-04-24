@@ -22,16 +22,33 @@ char ParserFich::caractSuivant() //ignore juste les blancs, pas les retours a la
     return pasDeplace;
 }
 
+char ParserFich::caractSuivantPasEntree() //ignore juste les blancs et les retour a la ligne
+{
+    char pasDeplace, deplace;
+    pasDeplace = entree.peek();
+    while (pasDeplace == ' ' || pasDeplace == '\n')
+    {
+        entree.get(deplace);
+        pasDeplace = entree.peek();
+    }
+    return pasDeplace;
+}
+
 Fraction ParserFich::lireFrac() //renvoie dans carSuiv le caractere suivant (+, < ou \n normalement)
 {
-    int num, denom = 1;
+    int num = 1, denom = 1;
+    char c = this->caractSuivantPasEntree();
 
-    entree >> num;
-    char c = this->caractSuivant();
-    if (c == '/')
+    //si pas de coefficient, c'est un 1 sous entendu
+    if (c == '0' || c == '1' || c == '2' ||c == '3' ||c == '4' ||c == '5' ||c == '6' ||c == '7' ||c == '8' ||c == '9' || c == '+' || c == '-')
     {
-        entree >> c;
-        entree >> denom;
+        entree >> num;
+
+        if (c == '/')
+        {
+            entree >> c;
+            entree >> denom;
+        }
     }
 
     return Fraction(num, denom);
@@ -107,6 +124,7 @@ void ParserFich::lireContraintes(Lp & linearProg)
 
             string var;
             entree >> var;
+
             int pos = trouverVar(var);
 
             if (pos == -1) //nouvelle variable, on suppose que nbVar = listeVar.size()
@@ -114,7 +132,6 @@ void ParserFich::lireContraintes(Lp & linearProg)
                 listeVar.push_back(var);
                 linearProg.nbVar++;
                 tmpVect.push_back(tmp);
-                cerr << "nouvelle var : " << var  << "qui va jusque la"<< endl;
             }
             else
             {
@@ -134,9 +151,7 @@ void ParserFich::lireContraintes(Lp & linearProg)
         (linearProg.coeffs).push_back(tmpVect);
         linearProg.nbContraintes++;
 
-        carSuiv = this->caractSuivant();
-        entree.get(carSuiv);
-        carSuiv = this->caractSuivant();
+        carSuiv = this->caractSuivantPasEntree();
     }
 
     //on complete les vecteurs avec les variables qu'on n'avait pas encore vu

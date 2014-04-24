@@ -1,0 +1,46 @@
+Pour compiler:
+Faire make dans le dossier code, les executables sont crées dans le dossier executables
+
+Les fichiers dans lesquels sont les programmes lineaires et les matrices de transportation pour donner aux executables sont dans fichiers_entree. Les resultats obtenus après avoir lancé l'executable dessus sont dans fichier_sortie (avec le même nom + ".out").
+
+Il y a 5 executables : 
+
+simplex : prend 2 arguments 
+          -le nom du fichier d'entree (avec un programme lineaire sous forme normale, comme question1_1)
+          -"Bland" ou "max" pour appliquer le choix correspondant pour les variables entrantes
+   
+          
+KleeMinty : prend 1 argument
+            -le nombre de variables
+            et écrit le programme linéaire de Klee-Minty avec ce nombre de variables, d'une façon qui peut être lue par le parseur du simplex
+            
+
+transportation : prend 2 arguments
+                 - le nom d'un fichier d'entree de la même forme que question4
+                 -"affichage"/"pasAffichage" pour savoir s'il affiche les étapes du simplex ou juste le résultat final
+                 Le programme transforme le problème de transportation du fichier donné en argument en un programme linéaire et le résout avec le simplex
+                 
+
+assignement : fonctionne comme transportation, sauf que l'entree est un problème d'assignement, et donc le format du fichier d'entrée est un peu différent (cf question5, on ne mets plus les capacités des 2 dernières lignes, et il n'y a plus qu'un nombre pour le nombre de sites de production et le nombre de sites de distribution (il y en a autant) ).
+
+
+*************Questions***************
+
+On peut réobtenir les résultats des questions (rangées dans fichier_sortie) en tapant, depuis le fichier executables : 
+
+Question1 : ./simplex ../fichiers_entree/question1_1 Bland
+            ./simplex ../fichiers_entree/question1_2 Bland
+            ./simplex ../fichiers_entree/question1_3 Bland
+            ./simplex ../fichiers_entree/question1_4 Bland
+            
+            
+Question2 : On peut générer les fichiers contenant Klee-Minty avec n variables en tapant ./KleeMinty n
+            A partir de n = 6, les entiers deviennent trop gros pour tenir sur des long long donc on ne peut plus faire de tests avec ce simplex, mais on remarque que pour n entre 3 et 5, le nombre de pivots du simplex avec la règle du max est 2^n-1.
+            pour n = 3 à 5, on peut taper
+            ./simplex ../fichiers_entree/KleeMinty3 max
+            pour obtenir la sortie du simplex pour la choix des variables entrantes max
+            
+Question4 : ./transportation ../fichiers_entree/question4 affichage
+
+Question5 : ./assignement ../fichiers_entree/question5 affichage
+            Dans l'exercice 8, on voulait maximiser la fonction de compétence, alors que l'algorithme assignement cherche une affectation qui minimise le cout, donc dans le fichier d'entrée j'ai mis des "-" devant les coefficients de la matrice, mais la valeur de l'objectif qui apparait est alors l'opposée de la valeur souhaitée
